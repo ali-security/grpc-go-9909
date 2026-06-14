@@ -1,16 +1,13 @@
-name: 'Lock Threads'
+name: Lock Threads
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '22 1 * * *'
-
 permissions:
   contents: read
 
 jobs:
   lock:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       issues: write
       pull-requests: write

@@ -2,15 +2,12 @@ name: Stale bot
 
 on:
   workflow_dispatch:
-  schedule:
-  - cron: "44 */2 * * *"
-
 permissions:
   contents: read
 
 jobs:
   stale:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       issues: write
       pull-requests: write
@@ -22,8 +19,8 @@ jobs:
         days-before-stale: 6
         days-before-close: 7
         only-labels: 'Status: Requires Reporter Clarification'
-        stale-issue-label: 'stale'
-        stale-pr-label: 'stale'
+        stale-issue-label: stale
+        stale-pr-label: stale
         operations-per-run: 999
         stale-issue-message: >
           This issue is labeled as requiring an update from the reporter, and no update has been received

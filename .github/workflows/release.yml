@@ -13,7 +13,7 @@ jobs:
       contents: write # to upload release asset (actions/upload-release-asset)
 
     name: Release cmd/protoc-gen-go-grpc
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: startsWith(github.event.release.tag_name, 'cmd/protoc-gen-go-grpc/')
     strategy:
       matrix:

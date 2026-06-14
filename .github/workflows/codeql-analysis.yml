@@ -1,18 +1,15 @@
-name: "CodeQL"
+name: CodeQL
 
 on:
   push:
-    branches: [ master ]
-  schedule:
-    - cron: '24 20 * * 3'
-
+    branches: [master, main]
 permissions:
   contents: read
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     permissions:
@@ -24,14 +21,14 @@ jobs:
       fail-fast: false
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
     # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-        languages: go
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: go
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2

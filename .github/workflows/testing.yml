@@ -4,9 +4,6 @@ name: Testing
 on:
   push:
   pull_request:
-  schedule:
-    - cron: 0 0 * * * # daily at 00:00
-
 permissions:
   contents: read
 
@@ -17,7 +14,7 @@ env:
 jobs:
   # Run the main gRPC-Go tests.
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     strategy:
       fail-fast: false
@@ -32,7 +29,7 @@ jobs:
 
           - type: tests
             goversion: '1.22'
-            testflags: '-race -tags=buffer_pooling'
+            testflags: -race -tags=buffer_pooling
 
           - type: tests
             goversion: '1.22'
@@ -48,7 +45,7 @@ jobs:
           - type: tests
             goversion: '1.22'
             testflags: -race
-            grpcenv: 'GRPC_EXPERIMENTAL_ENABLE_NEW_PICK_FIRST=true'
+            grpcenv: GRPC_EXPERIMENTAL_ENABLE_NEW_PICK_FIRST=true
 
     steps:
       # Setup the environment.
@@ -73,7 +70,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.goversion }}
-          cache-dependency-path: "**/*go.sum"
+          cache-dependency-path: '**/*go.sum'
 
       - name: Run tests
         if: matrix.type == 'tests'

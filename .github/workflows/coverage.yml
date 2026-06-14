@@ -6,7 +6,7 @@ permissions:
 
 jobs:
   upload:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Install checkout
         uses: actions/checkout@v4
@@ -14,7 +14,7 @@ jobs:
       - name: Install checkout
         uses: actions/setup-go@v5
         with:
-          go-version: "stable"
+          go-version: stable
 
       - name: Run coverage
         run: go test -coverprofile=coverage.out -coverpkg=./... ./...
